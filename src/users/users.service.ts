@@ -123,4 +123,18 @@ export class UsersService {
     return token;
   }
 
+
+  validaTo(token: any){
+
+    console.log(token);
+    
+    try{
+      this.jwtS.verify(token.token,{secret: 'cesarpassw'});
+      return true;
+    }catch(error){
+      throw new UnauthorizedException('Token invalid');
+
+    }
+  }
+
 }

@@ -77,7 +77,7 @@ export class TaskService {
 
 
   async findImpo(important: number){
-    const tasks = await this.taskRepository.findOne({where: {important}});
+    const tasks = await this.taskRepository.find({where: {important}});
     if (!tasks){
       throw new NotFoundException(`Not found level of importance ${important}`);
 

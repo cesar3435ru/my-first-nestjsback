@@ -38,4 +38,12 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
+
+
+  @Post('validarT')
+  validaToken(@Body() token:any){
+    return this.usersService.validaTo(token);
+  }
+
+  
 }
