@@ -40,7 +40,7 @@ export class TaskService {
   async findOne(id: number) {
     //Me trae solo una tarea
     const onlytask = await this.taskRepository.findOne({
-      where: { id }
+      relations: ['user'], where: { id }
       //Cuando se llame igual el parametro pues se queda igual. En este caso se llama id por eso se queda igual
     });
     if (!onlytask) {
@@ -82,6 +82,11 @@ export class TaskService {
       throw new NotFoundException(`Not found level of importance ${important}`);
 
     }
+    return tasks;
+  }
+
+  async search_idUser(important: number){
+    const tasks = await this.taskRepository.find({ relations: ['user'], where: { user: { id: important } } });
     return tasks;
   }
 

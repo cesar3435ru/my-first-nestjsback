@@ -3,6 +3,7 @@ import { TaskService } from './task.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 
+
 @Controller('task') //Es el nombre de la ruta para probar en Thunderclient
 @UsePipes(new ValidationPipe())
 export class TaskController {
@@ -21,6 +22,11 @@ export class TaskController {
   @Get('search')
   search(@Query('termino') termino:string){
    return this.taskService.buscar(termino);
+  }
+
+  @Get('searchu')
+  buscar_idUser(@Query('userId') userId: number){
+    return this.taskService.search_idUser(userId);
   }
 
   @Get(':id')

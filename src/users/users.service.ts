@@ -44,7 +44,7 @@ export class UsersService {
   async findOne(id: number) {
     //Me trae solo una tarea
     const onlyuser = await this.userRepository.findOne({
-      where: { id }
+      relations: ['tasks'], where: { id }
       //Cuando se llame igual el parametro pues se queda igual. En este caso se llama id por eso se queda igual
     });
     if (!onlyuser) {
@@ -97,7 +97,7 @@ export class UsersService {
     const {password, email}=user;
     const userFind = await this.userRepository.findOne({
       // where: {email}, select :{password: true, edad: true, email:true, nombre:true, apellidos:true, estado:true}
-      where: {email}, select :{password: true, email:true, nombre:true,}
+      where: {email}, select :{id:true, password: true, edad: true, email: true, nombre: true, apellidos: true, estado: true, sexo:true, tasks:true }
     })
     if(!userFind){ // No existe el correo en la base de datos
       throw new UnauthorizedException('Credenciales no validas');
